@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .overflow-hidden-scrollable {
+    -ms-overflow-style: none;
+  }
+
+  .overflow-hidden-scrollable::-webkit-scrollbar {
+    display: none;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #e8edf1 transparent; /* light-200 */
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #e8edf1; /* light-200 */
+    border-radius: 3px;
+    transition: background 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: #d0d7de; /* light-300 */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    * {
+      scrollbar-color: #21262d transparent; /* dark-200 */
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: #21262d; /* dark-200 */
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: #30363d; /* dark-300 */
+    }
+  }
+
+  :root.dark *,
+  html.dark *,
+  body.dark * {
+    scrollbar-color: #21262d transparent; /* dark-200 */
+  }
+
+  :root.dark *::-webkit-scrollbar-thumb,
+  html.dark *::-webkit-scrollbar-thumb,
+  body.dark *::-webkit-scrollbar-thumb {
+    background: #21262d; /* dark-200 */
+  }
+
+  :root.dark *::-webkit-scrollbar-thumb:hover,
+  html.dark *::-webkit-scrollbar-thumb:hover,
+  body.dark *::-webkit-scrollbar-thumb:hover {
+    background: #30363d; /* dark-300 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
+    rgb(var(--background-start-rgb));
+  overflow: hidden; /* App like feel */
+}
+
+/* --- Native Dragging Logic --- */
+.system-drag-region {
+  -webkit-app-region: drag;
+}
+
+.system-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

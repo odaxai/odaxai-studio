@@ -1,0 +1,347 @@
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  border-right: none; /* Removed heavy border for cleaner look */
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  height: 100vh;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 150; /* Higher than PDF panel (100) to ensure sidebar is always clickable */
+}
+
+.sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.header {
+  padding: 0 16px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #ececec;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 8px;
+  margin-left: -8px;
+}
+
+.logoContainer:hover {
+  background-color: var(--hover-color);
+}
+
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.headerIcon {
+  margin-left: auto;
+  color: #8e8e8e;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.headerIcon:hover {
+  background: var(--hover-color);
+  color: #fff;
+}
+
+.newChatBtn {
+  margin: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #ececec;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.newChatBtn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.newChatIcon {
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+/* Projects Section */
+.projectsSection {
+  padding: 0 12px;
+  margin-bottom: 8px;
+}
+
+.projectsHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.projectsHeader:hover {
+  background: var(--hover-color);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.addProjectBtn {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.projectsHeader:hover .addProjectBtn {
+  opacity: 1;
+}
+
+.addProjectBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.projectsList {
+  padding-left: 8px;
+}
+
+.projectItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 12px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.projectItem:hover {
+  background: var(--hover-color);
+  color: #fff;
+}
+
+.projectItemActive {
+  background: var(--hover-color);
+  color: #fff;
+}
+
+/* Chat list */
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 12px 12px 6px 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chatList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 12px;
+}
+
+.chatItem {
+  padding: 9px 12px;
+  margin-bottom: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+.chatItem:hover {
+  background-color: var(--hover-color);
+}
+
+.chatItem:hover .deleteBtn {
+  opacity: 1;
+}
+
+.chatItemActive {
+  background-color: var(--hover-color);
+}
+
+.chatTitle {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0; /* Ensure flex item can shrink below content size */
+  margin-right: 8px; /* Space for delete button */
+}
+
+.deleteBtn {
+  opacity: 0;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  padding: 6px; /* Increased padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  min-width: 32px; /* Increased width */
+  height: 32px; /* Fixed height */
+  z-index: 10; /* Ensure above text */
+}
+
+.chatItemActive .deleteBtn {
+  opacity: 0.8 !important; /* Highly visible on active chat */
+  background-color: rgba(255, 255, 255, 0.05); /* Slight background */
+}
+
+.deleteBtn:hover {
+  opacity: 1 !important;
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.emptyState p {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.emptyState span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.showMoreBtn {
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.showMoreBtn:hover {
+  background: var(--hover-color);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Footer */
+.footer {
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clearBtn:hover {
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Scrollbar */
+.chatList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chatList::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.chatList::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@odax/ide",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "start": "bash scripts/start.sh",
+    "stop": "bash scripts/stop.sh",
+    "clean": "rm -rf data config/code-server.sock"
+  },
+  "description": "code-server configuration and scripts for OdaxAI IDE"
+}
+

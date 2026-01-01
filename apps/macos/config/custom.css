@@ -1,0 +1,236 @@
+/* OdaxAI Studio - Black Theme Override */
+
+/* Main background - pure black */
+body {
+  background-color: #000000 !important;
+}
+
+/* Editor area */
+.monaco-editor,
+.monaco-editor-background,
+.monaco-editor .margin {
+  background-color: #000000 !important;
+}
+
+/* Activity bar */
+.activitybar {
+  background-color: #000000 !important;
+}
+
+.monaco-workbench .part.activitybar > .content {
+  background-color: #000000 !important;
+}
+
+/* Sidebar */
+.monaco-workbench .part.sidebar {
+  background-color: #0a0a0a !important;
+}
+
+/* Title bar */
+.monaco-workbench .part.titlebar {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #1a1a1a !important;
+}
+
+/* Status bar */
+.monaco-workbench .part.statusbar {
+  background-color: #000000 !important;
+  border-top: 1px solid #1a1a1a !important;
+  color: #808080 !important;
+}
+
+/* Panel (terminal, output, etc) */
+.monaco-workbench .part.panel {
+  background-color: #000000 !important;
+}
+
+/* Terminal */
+.terminal-wrapper {
+  background-color: #000000 !important;
+}
+
+.xterm-viewport {
+  background-color: #000000 !important;
+}
+
+/* Tabs */
+.monaco-workbench .part.editor > .content .editor-group-container > .title {
+  background-color: #000000 !important;
+}
+
+.tabs-container {
+  background-color: #000000 !important;
+}
+
+.tab {
+  background-color: #0a0a0a !important;
+  border-right: 1px solid #1a1a1a !important;
+}
+
+.tab.active {
+  background-color: #000000 !important;
+}
+
+/* Input fields */
+.monaco-inputbox {
+  background-color: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+}
+
+/* Quick input */
+.quick-input-widget {
+  background-color: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+}
+
+/* Context menu */
+.context-view {
+  background-color: #0a0a0a !important;
+  border: 1px solid #1a1a1a !important;
+}
+
+.monaco-menu {
+  background-color: #0a0a0a !important;
+}
+
+.monaco-menu .monaco-action-bar .action-item:hover {
+  background-color: #1a1a1a !important;
+}
+
+/* Scrollbars */
+.monaco-scrollable-element > .scrollbar > .slider {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.monaco-scrollable-element > .scrollbar > .slider:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Welcome page override */
+.monaco-workbench .part.editor > .content .welcomePageContainer {
+  background-color: #000000 !important;
+}
+
+/* Remove any GitHub/Microsoft branding */
+.monaco-workbench a[href*="github.com"],
+.monaco-workbench a[href*="microsoft.com"],
+.monaco-workbench a[href*="visualstudio.com"] {
+  display: none !important;
+}
+
+/* AGGRESSIVE AI SIGN-IN BLOCKING */
+*[aria-label*="Sign in to use"],
+*[aria-label*="sign in to use"],
+*[aria-label*="Sign in for AI"],
+*[aria-label*="AI features"],
+*[title*="Sign in to use"],
+*[title*="sign in to use"],
+*[title*="Copilot"],
+*[title*="AI features"],
+*[aria-label*="GitHub Copilot"],
+*[title*="GitHub Copilot"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0px !important;
+  width: 0px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  z-index: -9999 !important;
+}
+
+/* Hide Copilot and AI elements */
+.copilot-signin,
+.ai-signin,
+.auth-prompt,
+.signin-prompt,
+.github-copilot-widget,
+.copilot-status-bar,
+.copilot-suggestions,
+.copilot-completions,
+.intellicode-widget,
+.vs-intellicode,
+.ai-widget,
+.ai-suggestions,
+[data-vscode-extension-id*="copilot"],
+[data-extension-id*="copilot"],
+[data-vscode-extension-id*="intellicode"],
+[data-extension-id*="intellicode"],
+[data-vscode-extension-id*="ai"],
+[data-extension-id*="ai"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide notifications and dialogs */
+.notification-toast,
+.monaco-notification,
+.notification-list-item,
+.notifications-list,
+.notification-center,
+.notification-container,
+.dialog-widget,
+.modal-dialog,
+.monaco-dialog-box,
+.quick-input-widget,
+.quick-open-widget,
+.suggest-widget,
+.message-box,
+.info-message,
+.warning-message,
+.error-message {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Hide telemetry and sign-in prompts */
+.monaco-workbench .notifications-toasts,
+.monaco-workbench .extension-editor-header,
+.monaco-workbench .signin-prompt,
+.status-bar-item[aria-label*="Copilot"],
+.status-bar-item[aria-label*="AI"],
+.status-bar-item[aria-label*="Sign in"],
+.status-bar-item[aria-label*="GitHub"] {
+  display: none !important;
+}
+
+/* Hide any overlay that might be auth-related */
+.overlay,
+.signin-overlay,
+.auth-overlay,
+.ai-overlay,
+.modal-overlay,
+.dialog-overlay {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Nuclear option: hide dialogs */
+div[role="dialog"],
+div[role="alertdialog"] {
+  display: none !important;
+}
+
+/* Force hide dynamically created AI elements */
+.ai-blocked,
+.auth-blocked,
+.copilot-blocked {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0px !important;
+  width: 0px !important;
+}
+
+/* llama.vscode status bar item highlight */
+.statusbar-item[id*="llama"] {
+  background-color: #1a4d2e !important;
+  color: #00ff00 !important;
+  font-weight: bold !important;
+}
+

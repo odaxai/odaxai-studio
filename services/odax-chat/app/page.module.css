@@ -1,0 +1,31 @@
+.main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background-color: var(--chat-bg);
+  min-width: 0;
+  width: 100%;
+  transition: margin-left 0.3s ease;
+}
+
+.contentExpanded {
+  margin-left: 0;
+}
+
+.contentNormal {
+  margin-left: var(--sidebar-width);
+}
