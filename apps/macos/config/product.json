@@ -1,0 +1,52 @@
+{
+  "nameShort": "OdaxAI Studio",
+  "nameLong": "OdaxAI Studio - Code Editor",
+  "applicationName": "odaxai-studio",
+  "dataFolderName": ".odaxai",
+  "win32MutexName": "odaxaistudio",
+  "licenseName": "MIT",
+  "licenseUrl": "https://github.com/odaxai/odax-engine/blob/main/LICENSE",
+  "serverApplicationName": "odaxai-studio-server",
+  "serverDataFolderName": ".odaxai-server",
+  "version": "1.0.0",
+  "quality": "stable",
+  "extensionsGallery": {
+    "serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
+    "cacheUrl": "https://vscode.blob.core.windows.net/gallery/index",
+    "itemUrl": "https://marketplace.visualstudio.com/items"
+  },
+  "linkProtectionTrustedDomains": [
+    "https://*.visualstudio.com",
+    "https://localhost:*",
+    "http://localhost:*",
+    "http://127.0.0.1:*"
+  ],
+  "documentationUrl": "https://github.com/odaxai/odax-engine",
+  "introductoryVideosUrl": "https://github.com/odaxai/odax-engine",
+  "tipsAndTricksUrl": "https://github.com/odaxai/odax-engine",
+  "keyboardShortcutsUrlMac": "https://github.com/odaxai/odax-engine",
+  "keyboardShortcutsUrlLinux": "https://github.com/odaxai/odax-engine",
+  "keyboardShortcutsUrlWin": "https://github.com/odaxai/odax-engine",
+  "reportIssueUrl": "https://github.com/odaxai/odax-engine/issues",
+  "requestFeatureUrl": "https://github.com/odaxai/odax-engine/issues",
+  "commit": "odaxai-custom",
+  "enableTelemetry": false,
+  "aiConfig": {
+    "ariaKey": ""
+  },
+  "msftInternalDomains": [],
+  "sendASmile": {
+    "reportIssueUrl": "https://github.com/odaxai/odax-engine/issues",
+    "requestFeatureUrl": "https://github.com/odaxai/odax-engine/issues"
+  },
+  "extensionAllowedProposedApi": [
+    "ggml-org.llama-vscode"
+  ],
+  "extensionEnabledApiProposals": {
+    "ggml-org.llama-vscode": [
+      "inlineCompletionsAdditions",
+      "textDocumentNotebook"
+    ]
+  }
+}
+

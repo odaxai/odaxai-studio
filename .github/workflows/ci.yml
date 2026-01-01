@@ -1,0 +1,44 @@
+name: CI / CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-chat:
+    name: Check OdaxChat (Next.js)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install
+        
+      - name: Build Chat App
+        working-directory: services/odax-chat
+        run: pnpm run build
+
+  build-macos:
+    name: Check macOS App (Swift)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Install xcodegen
+        run: brew install xcodegen
+        
+      - name: Build native app
+        working-directory: apps/macos/scripts
+        run: ./build.sh

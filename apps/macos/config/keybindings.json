@@ -1,0 +1,65 @@
+[
+  {
+    "key": "ctrl+l",
+    "command": "extension.triggerInlineCompletion",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "tab",
+    "command": "editor.action.inlineSuggest.commit",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "shift+tab",
+    "command": "extension.acceptFirstLine",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "ctrl+right",
+    "command": "extension.acceptFirstWord",
+    "when": "inlineSuggestionVisible && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "extension.showMenu"
+  },
+  {
+    "key": "ctrl+shift+a",
+    "command": "extension.askAi"
+  },
+  {
+    "key": "ctrl+shift+e",
+    "command": "extension.editSelectedText",
+    "when": "editorHasSelection"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "extension.copyIntercept",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+x",
+    "command": "extension.cutIntercept",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+l",
+    "command": "-workbench.action.chat.open",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-workbench.action.chat.open",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+alt+i",
+    "command": "-github.copilot.interactiveEditor.explain",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+shift+i",
+    "command": "-workbench.action.chat.openEditSession"
+  }
+]
+
