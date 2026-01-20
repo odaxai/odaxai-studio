@@ -151,6 +151,38 @@ describe('Repo hygiene: no code-server references remain', () => {
   });
 });
 
+describe('Repo hygiene: removed services are not tracked', () => {
+  it('services/code-server/ not tracked', () => {
+    expect(gitLsFiles('services/code-server/*')).toHaveLength(0);
+  });
+
+  it('server/llama.cpp/ not tracked (build from source)', () => {
+    expect(gitLsFiles('server/llama.cpp/*')).toHaveLength(0);
+  });
+
+  it('server/whisper.cpp/ not tracked', () => {
+    expect(gitLsFiles('server/whisper.cpp/*')).toHaveLength(0);
+  });
+
+  it('apps/ide/ not tracked', () => {
+    expect(gitLsFiles('apps/ide/*')).toHaveLength(0);
+  });
+
+  it('apps/desktop/ not tracked', () => {
+    expect(gitLsFiles('apps/desktop/*')).toHaveLength(0);
+  });
+
+  it('packages/ not tracked (empty workspace packages removed)', () => {
+    expect(gitLsFiles('packages/*')).toHaveLength(0);
+  });
+
+  it('total tracked files is reasonable (< 250)', () => {
+    const total = gitLsFiles().length;
+    expect(total).toBeLessThan(250);
+    expect(total).toBeGreaterThan(50);
+  });
+});
+
 describe('Repo hygiene: project configuration integrity', () => {
   it('setup.sh uses dynamic PROJECT_ROOT (no hardcoded paths)', () => {
     const setupPath = path.join(PROJECT_ROOT, 'setup.sh');
@@ -180,12 +212,33 @@ describe('Repo hygiene: project configuration integrity', () => {
     expect(fs.existsSync(path.join(PROJECT_ROOT, 'LICENSE'))).toBe(true);
   });
 
-  it('CI workflow exists and runs on push + PR', () => {
+  it('CONTRIBUTING.md exists', () => {
+    expect(fs.existsSync(path.join(PROJECT_ROOT, 'CONTRIBUTING.md'))).toBe(true);
+  });
+
+  it('SECURITY.md exists', () => {
+    expect(fs.existsSync(path.join(PROJECT_ROOT, 'SECURITY.md'))).toBe(true);
+  });
+
+  it('CI workflow exists and runs tests on push + PR', () => {
     const ciPath = path.join(PROJECT_ROOT, '.github', 'workflows', 'ci.yml');
     const content = fs.readFileSync(ciPath, 'utf-8');
     expect(content).toContain('push:');
     expect(content).toContain('pull_request:');
     expect(content).toContain('npm test');
     expect(content).toContain('xcodebuild test');
+  });
+
+  it('has CODEOWNERS', () => {
+    expect(fs.existsSync(path.join(PROJECT_ROOT, '.github', 'CODEOWNERS'))).toBe(true);
+  });
+
+  it('has PR template', () => {
+    expect(fs.existsSync(path.join(PROJECT_ROOT, '.github', 'PULL_REQUEST_TEMPLATE.md'))).toBe(true);
+  });
+
+  it('has issue templates', () => {
+    expect(fs.existsSync(path.join(PROJECT_ROOT, '.github', 'ISSUE_TEMPLATE', 'bug_report.yml'))).toBe(true);
+    expect(fs.existsSync(path.join(PROJECT_ROOT, '.github', 'ISSUE_TEMPLATE', 'feature_request.yml'))).toBe(true);
   });
 });

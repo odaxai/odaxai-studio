@@ -1,35 +1,22 @@
 {
   "name": "odaxai-studio",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
-  "description": "OdaxAI Studio - Unified browser-first development environment",
+  "description": "OdaxAI Studio — Local-first AI workspace for macOS",
   "scripts": {
-    "dev": "turbo run dev",
-    "build": "turbo run build",
-    "lint": "turbo run lint",
-    "type-check": "turbo run type-check",
-    "clean": "turbo run clean && rm -rf node_modules",
+    "dev": "cd services/odax-chat && npm run dev",
+    "build": "cd services/odax-chat && npm run build",
+    "test": "cd services/odax-chat && npm test",
+    "lint": "cd services/odax-chat && npm run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "setup:ide": "cd apps/ide && pnpm run setup",
-    "start:ide": "cd apps/ide && pnpm run start",
-    "start:web": "cd apps/web && pnpm run dev",
-    "start:all": "concurrently \"pnpm run start:ide\" \"pnpm run start:web\""
+    "setup": "./setup.sh"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "devDependencies": {
-    "@turbo/gen": "^1.11.2",
-    "concurrently": "^8.2.2",
     "prettier": "^3.1.1",
-    "turbo": "^1.11.2",
     "typescript": "^5.3.3"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "pnpm": ">=8.0.0"
-  },
-  "packageManager": "pnpm@8.15.0"
+    "node": ">=18.0.0"
+  }
 }
 

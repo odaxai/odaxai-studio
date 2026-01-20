@@ -1,0 +1,55 @@
+name: Bug Report
+description: Report a bug in OdaxAI Studio
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      placeholder: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: What you expected to happen.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - macOS App
+        - OdaxChat (Web UI)
+        - AI Engine (llama.cpp)
+        - Setup / Installation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: macOS version
+      placeholder: "e.g. macOS 15.3 Sequoia"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Screenshots
+      placeholder: Paste any relevant log output or attach screenshots.

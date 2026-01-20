@@ -1,0 +1,17 @@
+# ══════════════════════════════════════════════
+#  OdaxAI Studio — Code Owners
+# ══════════════════════════════════════════════
+#  Every PR requires review from the owner of the affected area.
+#  https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default — all changes
+*                           @odaxai/core
+
+# macOS native app
+apps/macos/                 @odaxai/core
+
+# Chat service
+services/odax-chat/         @odaxai/core
+
+# CI / CD
+.github/                    @odaxai/core
