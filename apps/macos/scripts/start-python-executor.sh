@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# ──────────────────────────────────────────────────────────────
+# OdaxAI Studio
+# Copyright © 2026 OdaxAI SRL. All rights reserved.
+# Licensed under the PolyForm Noncommercial License 1.0.0
+# ──────────────────────────────────────────────────────────────
+
 export PATH="/usr/local/bin:/opt/homebrew/bin:$PATH"
 
 # Get the script's directory and project root

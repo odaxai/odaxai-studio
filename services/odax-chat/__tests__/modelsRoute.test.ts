@@ -1,3 +1,9 @@
+// ──────────────────────────────────────────────────────────────
+// OdaxAI Studio
+// Copyright © 2026 OdaxAI SRL. All rights reserved.
+// Licensed under the PolyForm Noncommercial License 1.0.0
+// ──────────────────────────────────────────────────────────────
+
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { NextResponse } from 'next/server';
 import path from 'path';

@@ -1,3 +1,9 @@
+// ──────────────────────────────────────────────────────────────
+// OdaxAI Studio
+// Copyright © 2026 OdaxAI SRL. All rights reserved.
+// Licensed under the PolyForm Noncommercial License 1.0.0
+// ──────────────────────────────────────────────────────────────
+
 import { extractText } from 'unpdf';
 import fs from 'fs/promises';
 import path from 'path';

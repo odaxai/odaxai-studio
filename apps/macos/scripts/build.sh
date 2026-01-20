@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# ──────────────────────────────────────────────────────────────
+# OdaxAI Studio
+# Copyright © 2026 OdaxAI SRL. All rights reserved.
+# Licensed under the PolyForm Noncommercial License 1.0.0
+# ──────────────────────────────────────────────────────────────
+
 # OdaxStudio - Automated Build Script
 # Generates Xcode project and builds the app
 

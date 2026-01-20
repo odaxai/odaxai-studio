@@ -1,3 +1,9 @@
+// ──────────────────────────────────────────────────────────────
+// OdaxAI Studio
+// Copyright © 2026 OdaxAI SRL. All rights reserved.
+// Licensed under the PolyForm Noncommercial License 1.0.0
+// ──────────────────────────────────────────────────────────────
+
 /**
  * Memory Service
  * Main facade for the Global Memory layer

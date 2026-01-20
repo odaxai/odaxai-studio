@@ -1,3 +1,9 @@
+// ──────────────────────────────────────────────────────────────
+// OdaxAI Studio
+// Copyright © 2026 OdaxAI SRL. All rights reserved.
+// Licensed under the PolyForm Noncommercial License 1.0.0
+// ──────────────────────────────────────────────────────────────
+
 /**
  * Vector Memory Service
  * Manages user interactions in LanceDB with embeddings for semantic search

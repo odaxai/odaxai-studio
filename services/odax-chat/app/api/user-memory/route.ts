@@ -1,3 +1,9 @@
+// ──────────────────────────────────────────────────────────────
+// OdaxAI Studio
+// Copyright © 2026 OdaxAI SRL. All rights reserved.
+// Licensed under the PolyForm Noncommercial License 1.0.0
+// ──────────────────────────────────────────────────────────────
+
 /**
  * User Memory API - Local to odax-chat
  * Stores documents (PDFs), facts, and conversation history

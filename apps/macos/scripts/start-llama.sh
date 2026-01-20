@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# ──────────────────────────────────────────────────────────────
+# OdaxAI Studio
+# Copyright © 2026 OdaxAI SRL. All rights reserved.
+# Licensed under the PolyForm Noncommercial License 1.0.0
+# ──────────────────────────────────────────────────────────────
+
 # Start llama-server using bundled binaries
 SCRIPT_DIR="$(dirname "$0")"
 LLAMA_DIR="$SCRIPT_DIR/../resources/llama-server"
