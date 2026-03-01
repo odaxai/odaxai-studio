@@ -1,43 +1,44 @@
 #!/bin/bash
 
-# OdaxAI Studio - All-in-One Runner
-# Setup and Start the Unified Desktop Experience (macOS)
+# ──────────────────────────────────────────────────────────────
+# OdaxAI Studio
+# Copyright © 2026 OdaxAI SRL. All rights reserved.
+# Licensed under the PolyForm Noncommercial License 1.0.0
+# ──────────────────────────────────────────────────────────────
 
 set -e
 
-echo "🚀 Initializing OdaxAI Studio..."
+PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
+cd "$PROJECT_ROOT"
 
-# 1. Check/Install Dependencies
-if [ ! -d "node_modules" ]; then
-    echo "📦 Installing dependencies (pnpm)..."
-    pnpm install
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+echo ""
+echo "  ╔══════════════════════════════════════╗"
+echo "  ║         OdaxAI Studio  v1.1          ║"
+echo "  ║   Local-first AI workspace (macOS)   ║"
+echo "  ╚══════════════════════════════════════╝"
+echo ""
+
+if [[ "$OSTYPE" != "darwin"* ]]; then
+    echo -e "${RED}OdaxAI Studio currently requires macOS.${NC}"
+    exit 1
 fi
 
-# 2. Detect Platform
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "🍎 Detected macOS - Starting Native App with code-server + llama.vscode"
-    echo ""
-    echo "🎨 Features:"
-    echo "  ✓ code-server (VS Code in browser)"
-    echo "  ✓ llama.vscode (Local AI)"
-    echo "  ✓ Full Black Theme"
-    echo "  ✓ Clean Menus (no GitHub/Copilot)"
-    echo ""
-    
-    # Run macOS native app
-    cd apps/macos
-    chmod +x scripts/run.sh
-    exec ./scripts/run.sh
-else
-    echo "🐧 Detected Linux/Windows - Starting Desktop App"
-    
-    # Setup IDE Layer (code-server & extensions)
-    echo "🛠️  Setting up IDE Layer..."
-    chmod +x apps/ide/scripts/setup.sh
-    ./apps/ide/scripts/setup.sh
-    
-    # Start the Desktop App (Local Engine)
-    echo "🖥️  Starting OdaxAI Desktop App..."
-    echo "   (This will spawn the Web UI and IDE Backend automatically)"
-    cd apps/desktop && pnpm run dev
+if [ ! -d "services/odax-chat/node_modules" ]; then
+    echo -e "${YELLOW}First run detected — installing dependencies...${NC}"
+    ./setup.sh
 fi
+
+echo -e "${GREEN}Starting services...${NC}"
+echo "  Dashboard  → http://localhost:3000"
+echo "  OdaxChat   → http://localhost:3002"
+echo "  LLM server → http://localhost:8081"
+echo ""
+
+cd apps/macos
+chmod +x scripts/run.sh
+exec ./scripts/run.sh

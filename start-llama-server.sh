@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ──────────────────────────────────────────────────────────────
+# OdaxAI Studio
+# Copyright © 2026 OdaxAI SRL. All rights reserved.
+# Licensed under the PolyForm Noncommercial License 1.0.0
+# ──────────────────────────────────────────────────────────────
+
+
 # OdaxAI - Llama.cpp Server Launcher
 # Avvia il server llama.cpp per inference locale
 

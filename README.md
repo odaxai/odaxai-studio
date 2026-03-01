@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://odaxai.com">
-    <img src="services/odax-chat/public/odaxai-logo.png" alt="OdaxAI Studio" height="120" />
+    <img src=".github/logo.png" alt="OdaxAI Studio" height="120" />
   </a>
   <h1>OdaxAI Studio</h1>
   <p><strong>Local-first AI workspace for macOS</strong></p>

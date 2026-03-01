@@ -5,85 +5,51 @@
 # Copyright © 2026 OdaxAI SRL. All rights reserved.
 # Licensed under the PolyForm Noncommercial License 1.0.0
 # ──────────────────────────────────────────────────────────────
-
-# ============================================
-# OdaxEngine - Setup & Restore Script
-# ============================================
-# Questo script reinstalla tutte le dipendenze
-# e prepara il progetto per essere eseguito.
-# 
-# Uso: ./setup.sh
-# ============================================
+#
+# Installs all dependencies and prepares the project.
+# Usage: ./setup.sh
 
 set -e
 
 PROJECT_ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$PROJECT_ROOT"
 
-echo "🔧 OdaxEngine Setup Script"
-echo "=========================="
-echo ""
-
-# Colori
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Funzione per installare dipendenze
+echo ""
+echo "  OdaxAI Studio — Setup"
+echo "  ====================="
+echo ""
+
 install_deps() {
     local dir=$1
     local name=$2
     local extra_flags=$3
-    
+
     if [ -d "$dir" ] && [ -f "$dir/package.json" ]; then
-        echo -e "${YELLOW}📦 Installing $name...${NC}"
+        echo -e "${YELLOW}Installing $name...${NC}"
         cd "$dir"
         rm -rf node_modules 2>/dev/null || true
         npm install $extra_flags 2>&1 | tail -5
-        echo -e "${GREEN}✅ $name installed${NC}"
+        echo -e "${GREEN}  $name installed${NC}"
         cd "$PROJECT_ROOT"
     else
-        echo -e "${RED}⚠️ $name directory not found, skipping...${NC}"
+        echo -e "${RED}  $name directory not found, skipping${NC}"
     fi
 }
 
-# 1. Installa dipendenze apps/web
 install_deps "$PROJECT_ROOT/apps/web" "Dashboard (apps/web)" ""
-
-# 2. Installa dipendenze odax-chat (richiede --legacy-peer-deps)
-install_deps "$PROJECT_ROOT/services/odax-chat" "OdaxChat" "--legacy-peer-deps"
-
-# 3. Installa dipendenze Perplexica (opzionale)
-install_deps "$PROJECT_ROOT/services/Perplexica" "Perplexica" ""
-
-# 4. Verifica installazione
-echo ""
-echo "🔍 Verifying installations..."
-
-# Verifica odax-chat
-cd "$PROJECT_ROOT/services/odax-chat"
-if npm ls next 2>&1 | grep -q "invalid"; then
-    echo -e "${RED}❌ OdaxChat has dependency issues!${NC}"
-    echo "   Try fixing package.json: change next@16.x.x to next@15.1.0"
-    exit 1
-else
-    echo -e "${GREEN}✅ OdaxChat dependencies OK${NC}"
-fi
-
-cd "$PROJECT_ROOT"
+install_deps "$PROJECT_ROOT/services/odax-chat" "OdaxChat (services/odax-chat)" "--legacy-peer-deps"
 
 echo ""
-echo "========================================"
-echo -e "${GREEN}✅ Setup complete!${NC}"
+echo -e "${GREEN}Setup complete.${NC}"
 echo ""
-echo "To run the app:"
-echo "  cd apps/macos/scripts && sh run.sh"
+echo "  To launch:  ./run-odax.sh"
 echo ""
-echo "Or to start services manually:"
-echo "  # Terminal 1 - Dashboard"
-echo "  cd apps/web && npm run dev"
+echo "  Or start services individually:"
+echo "    cd apps/web            && npm run dev          # Dashboard  :3000"
+echo "    cd services/odax-chat  && PORT=3002 npm run dev # OdaxChat   :3002"
 echo ""
-echo "  # Terminal 2 - OdaxChat"  
-echo "  cd services/odax-chat && PORT=3002 npm run dev"
-echo "========================================"

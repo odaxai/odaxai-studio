@@ -248,3 +248,43 @@ describe('Repo hygiene: project configuration integrity', () => {
     expect(fs.existsSync(path.join(PROJECT_ROOT, '.github', 'ISSUE_TEMPLATE', 'feature_request.yml'))).toBe(true);
   });
 });
+
+describe('Repo hygiene: copyright headers', () => {
+  const SOURCE_EXTENSIONS = ['.ts', '.tsx', '.swift', '.js', '.mjs'];
+  const SKIP_PATTERNS = ['.d.ts', '.min.js', '.config.js', '.config.ts', 'vitest.config', 'eslint.config', 'tailwind.config', 'postcss.config', 'next-env'];
+
+  function collectSourceFiles(dir: string): string[] {
+    const results: string[] = [];
+    try {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory() && !['node_modules', '.next', 'build', '.git', '__pycache__'].includes(entry.name)) {
+          results.push(...collectSourceFiles(fullPath));
+        } else if (entry.isFile() && SOURCE_EXTENSIONS.some(ext => entry.name.endsWith(ext))) {
+          if (!SKIP_PATTERNS.some(pat => entry.name.includes(pat))) {
+            results.push(fullPath);
+          }
+        }
+      }
+    } catch { /* skip */ }
+    return results;
+  }
+
+  const sourceFiles = collectSourceFiles(PROJECT_ROOT);
+
+  it('found source files to check', () => {
+    expect(sourceFiles.length).toBeGreaterThan(50);
+  });
+
+  it('all source files have OdaxAI SRL copyright header', () => {
+    const missing: string[] = [];
+    for (const file of sourceFiles) {
+      const head = fs.readFileSync(file, 'utf-8').slice(0, 500);
+      if (!head.includes('Copyright') || !head.includes('OdaxAI SRL')) {
+        missing.push(path.relative(PROJECT_ROOT, file));
+      }
+    }
+    expect(missing, `Files missing copyright:\n${missing.join('\n')}`).toHaveLength(0);
+  });
+});
