@@ -12,7 +12,7 @@ cd "$(dirname "$0")"
 SCRIPTS_DIR="$(pwd)"
 PROJECT_DIR="$(dirname "$SCRIPTS_DIR")/project"
 BUILD_DIR="$(dirname "$SCRIPTS_DIR")/build"
-DMG_NAME="OdaxStudio"
+DMG_NAME="OdaxStudio-1.1.0"
 VOLUME_NAME="OdaxAI Studio"
 
 # Step 1: Build Release version
