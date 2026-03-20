@@ -9,12 +9,27 @@
 </div>
 
 <p align="center">
+  <a href="#demo">Demo</a> &bull;
   <a href="#features">Features</a> &bull;
   <a href="#quick-start">Quick Start</a> &bull;
   <a href="#build-from-source">Build from Source</a> &bull;
   <a href="#architecture">Architecture</a> &bull;
   <a href="#contributing">Contributing</a> &bull;
   <a href="#license">License</a>
+</p>
+
+---
+
+## Demo
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=TTXvvQSuD1E">
+    <img src="https://img.youtube.com/vi/TTXvvQSuD1E/maxresdefault.jpg" alt="OdaxAI Studio Demo" width="700" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=TTXvvQSuD1E"><strong>Watch the full demo on YouTube →</strong></a>
 </p>
 
 ---
