@@ -51,11 +51,6 @@
 - **Code execution** — run Python snippets directly from chat
 - **Document translation** — full-document translation with background processing
 
-### Integrated IDE
-- Full **VS Code** experience in-browser via code-server
-- **AI autocomplete** powered by llama.vscode — runs entirely on-device
-- Pre-configured dark theme, extensions, and clean menus
-
 ### Native macOS App
 - Swift/SwiftUI wrapper with tabbed WebView interface
 - Automatic service lifecycle management (start, stop, health checks)
@@ -172,15 +167,13 @@ odaxai-studio/
 │   │   ├── project/       # Xcode project
 │   │   ├── scripts/       # Build & run scripts
 │   │   └── resources/     # Runtime resources (binaries built separately)
-│   ├── web/               # Dashboard UI (Next.js)
-│   └── ide/               # VS Code configuration & extensions
+│   └── web/               # Dashboard UI (Next.js)
 │
 ├── server/
-│   └── llama.cpp/         # LLM inference engine (Metal-optimized fork)
+│   └── llama.cpp/         # LLM inference engine (Metal-optimized)
 │
 ├── services/
-│   ├── odax-chat/         # AI chat interface (Next.js + React)
-│   └── code-server/       # VS Code in browser
+│   └── odax-chat/         # AI chat interface (Next.js + React)
 │
 ├── packages/              # Shared packages
 ├── setup.sh               # Dependency installer
@@ -193,7 +186,6 @@ odaxai-studio/
 |------|---------|-------------|
 | `3000` | Dashboard | Management UI and service overview |
 | `3002` | OdaxAI Chat | AI chat, PDF analysis, document translation |
-| `8080` | code-server | VS Code IDE in the browser |
 | `8081` | llama.cpp | LLM inference API (OpenAI-compatible) |
 
 ### Tech Stack
@@ -202,8 +194,7 @@ odaxai-studio/
 |-------|-----------|
 | Native App | Swift 5.9, SwiftUI, WKWebView |
 | AI Chat | Next.js 15, React 19, TypeScript |
-| IDE | code-server (VS Code in browser) + llama.vscode |
-| LLM Backend | llama.cpp — C/C++ with Metal GPU acceleration |
+| LLM Backend | llama.cpp — C/C++, Metal GPU acceleration |
 | Vector Database | LanceDB (embedded, local-only) |
 | Build System | npm workspaces |
 
@@ -254,5 +245,4 @@ For commercial licensing inquiries, please open an issue or contact the maintain
 OdaxAI Studio builds on these open-source projects:
 
 - [llama.cpp](https://github.com/ggerganov/llama.cpp) — High-performance LLM inference
-- [code-server](https://github.com/coder/code-server) — VS Code in the browser
 - [LanceDB](https://github.com/lancedb/lancedb) — Embedded vector database

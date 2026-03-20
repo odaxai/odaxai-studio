@@ -19,7 +19,6 @@ class ProcessManager: ObservableObject {
     ]
     
     private var dashboardProcess: Process?
-    private var codeServerProcess: Process?
     private var odaxChatProcess: Process?
     private var llamaServerProcess: Process?
     private var pythonExecutorProcess: Process?
@@ -207,9 +206,6 @@ Project root detected: \(self.projectRoot)
             // Start Python Executor
             self.runScript("start-python-executor.sh")
 
-            // Start Code Server (can delay slightly)
-            self.runScript("start-codeserver.sh")
-
             Thread.sleep(forTimeInterval: 0.5)
 
             // Start llama-server (AI Engine)
@@ -255,8 +251,6 @@ Project root detected: \(self.projectRoot)
         
         if scriptName.contains("dashboard") {
             dashboardProcess = process
-        } else if scriptName.contains("codeserver") {
-            codeServerProcess = process
         } else if scriptName.contains("odaxchat") {
             odaxChatProcess = process
         } else if scriptName.contains("python-executor") {
@@ -431,13 +425,11 @@ Project root detected: \(self.projectRoot)
         serviceMonitorTimer?.invalidate()
         
         dashboardProcess?.terminate()
-        codeServerProcess?.terminate()
         odaxChatProcess?.terminate()
         llamaServerProcess?.terminate()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
             self?.dashboardProcess?.interrupt()
-            self?.codeServerProcess?.interrupt()
             self?.odaxChatProcess?.interrupt()
             self?.llamaServerProcess?.interrupt()
         }
@@ -447,7 +439,7 @@ Project root detected: \(self.projectRoot)
     }
     
     private func cleanupPorts() {
-        for port in [3000, 3001, 8080, 3002, 8081] {
+        for port in [3000, 3001, 3002, 8081] {
             let lsof = Process()
             lsof.executableURL = URL(fileURLWithPath: "/usr/sbin/lsof")
             lsof.arguments = ["-ti:\(port)"]
