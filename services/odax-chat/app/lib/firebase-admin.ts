@@ -4,19 +4,16 @@ if (!admin.apps.length) {
   try {
     admin.initializeApp({
       credential: admin.credential.cert({
-        projectId: 'odaxai-cloud',
-        clientEmail:
-          'firebase-adminsdk-fbsvc@odaxai-cloud.iam.gserviceaccount.com',
-        // Replace literal \n with actual newlines
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
         privateKey: process.env.FIREBASE_PRIVATE_KEY
           ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
           : undefined,
       }),
     });
-    console.log('🔥 Firebase Admin Initialized');
+    console.log('Firebase Admin Initialized');
   } catch (error: any) {
-    console.error('❌ Firebase Admin Init Error:', error);
-    // Don't swallow error, let it bubble so we see it in 500 response
+    console.error('Firebase Admin Init Error:', error);
     throw error;
   }
 }

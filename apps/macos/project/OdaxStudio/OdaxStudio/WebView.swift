@@ -120,10 +120,11 @@ struct WebView: NSViewRepresentable {
                 print("🔍 Navigation request to: \(url)")
                 
                 // List of allowed hosts for OAuth flow
+                let firebaseDomain = ProcessInfo.processInfo.environment["FIREBASE_AUTH_DOMAIN"] ?? "localhost"
                 let allowedHosts = [
                     "localhost", "127.0.0.1",
                     "accounts.google.com", "www.google.com",
-                    "odaxai-cloud.firebaseapp.com",
+                    firebaseDomain,
                     "apis.google.com"
                 ]
                 

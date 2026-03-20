@@ -4,5 +4,5 @@ password:
 cert: false
 disable-telemetry: true
 disable-update-check: true
-user-data-dir: /Users/nicolosavioli/Desktop/code/OdaxEngine/apps/ide/data
-extensions-dir: /Users/nicolosavioli/Desktop/code/OdaxEngine/apps/ide/extensions
+user-data-dir: ./data
+extensions-dir: ./extensions

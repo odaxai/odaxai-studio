@@ -1,9 +1,8 @@
 /**
  * Vector Memory Service
  * Manages user interactions in LanceDB with embeddings for semantic search
- * Based on patent: LOCAL-FIRST UNIFIED AI PLATFORM WITH INTEGRATED VECTOR MEMORY
  *
- * Key Patent Features:
+ * Features:
  * - LanceDB vector database for persistent local document indexing
  * - SHA-256 hash-based deduplication preventing redundant indexing
  * - Hybrid search combining semantic vector similarity with keyword filtering
@@ -25,7 +24,7 @@ interface MemoryEntry {
   type: 'fact' | 'conversation' | 'document';
   key: string;
   content: string;
-  hash: string; // SHA-256 hash for deduplication (per patent)
+  hash: string;
   timestamp: number;
   vector: number[];
 }
@@ -33,7 +32,7 @@ interface MemoryEntry {
 let connection: Connection | null = null;
 
 /**
- * Compute SHA-256 hash for content deduplication (per patent spec)
+ * Compute SHA-256 hash for content deduplication
  */
 function computeHash(content: string): string {
   return crypto.createHash('sha256').update(content).digest('hex');
@@ -135,7 +134,7 @@ async function getEmbedding(text: string): Promise<number[]> {
 }
 
 /**
- * Add a fact to vector memory with SHA-256 deduplication (per patent)
+ * Add a fact to vector memory with SHA-256 deduplication
  */
 export async function addFact(key: string, value: string): Promise<void> {
   try {
@@ -184,7 +183,7 @@ export async function addFact(key: string, value: string): Promise<void> {
 }
 
 /**
- * Add a conversation message to vector memory with SHA-256 deduplication (per patent)
+ * Add a conversation message to vector memory with SHA-256 deduplication
  */
 export async function addConversation(
   role: string,
@@ -194,7 +193,7 @@ export async function addConversation(
     const table = await getTable();
     const hash = computeHash(content);
 
-    // Deduplication: Check if conversation already exists (per patent)
+    // Deduplication: Check if conversation already exists
     const duplicates = await table
       .search(new Array(EMBEDDING_DIM).fill(0))
       .where(`hash = '${hash}'`)

@@ -105,3 +105,11 @@ apps/macos/build/
 # Logs
 apps/logs/
 logs/
+
+# PDFs and large documents (user data)
+*.pdf
+services/odax-chat/public/*.pdf
+services/odax-chat/app/components/*.pdf
+
+# DMG installer builds
+*.dmg

@@ -1,7 +1,7 @@
 /**
  * User Memory API - Local to odax-chat
  * Stores documents (PDFs), facts, and conversation history
- * Uses LanceDB for vector storage and semantic search (per patent spec)
+ * Uses LanceDB for vector storage and semantic search
  */
 
 import { NextRequest, NextResponse } from 'next/server';

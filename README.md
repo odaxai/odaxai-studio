@@ -1,74 +1,62 @@
 <div align="center">
-  <img src="services/odax-chat/public/odaxai-logo.png" alt="OdaxAI Logo" height="100" style="vertical-align: middle;" />
-  <h1 style="display: inline-block; vertical-align: middle; margin-left: 15px;">OdaxAI Studio</h1>
+  <img src="services/odax-chat/public/odaxai-logo.png" alt="OdaxAI Studio" height="120" />
+  <h1>OdaxAI Studio</h1>
+  <p><strong>Local-first AI workspace for macOS</strong></p>
+  <p>Chat with LLMs, code in an integrated IDE, analyze documents — everything runs on your machine.</p>
+  <p>No cloud dependency. No API keys required. Your data never leaves your device.</p>
 </div>
 
 <p align="center">
-  <strong>Your private AI workspace — runs entirely on your Mac</strong>
-</p>
-
-<p align="center">
-  Chat with AI, code in an integrated IDE, analyze documents — all locally.<br/>
-  No cloud. No API keys. No data leaves your machine.
-</p>
-
-<p align="center">
-  <a href="#demo">Demo</a> •
-  <a href="#download">Download</a> •
-  <a href="#features">Features</a> •
-  <a href="#build-from-source">Build from Source</a> •
+  <a href="#features">Features</a> &bull;
+  <a href="#quick-start">Quick Start</a> &bull;
+  <a href="#build-from-source">Build from Source</a> &bull;
+  <a href="#architecture">Architecture</a> &bull;
+  <a href="#contributing">Contributing</a> &bull;
   <a href="#license">License</a>
 </p>
-
----
-
-## Demo
-
-[![OdaxAI Studio Demo](https://img.youtube.com/vi/TTXvvQSuD1E/maxresdefault.jpg)](https://www.youtube.com/watch?v=TTXvvQSuD1E)
-
-> **[Watch the full demo on YouTube ->](https://www.youtube.com/watch?v=TTXvvQSuD1E)**
-
----
-
-## Download
-
-### macOS (Apple Silicon & Intel)
-
-Download the latest `.dmg` from the **[Releases](https://github.com/odaxai/odaxai-studio/releases)** page:
-
-1. Download `OdaxStudio-1.0.0.dmg`
-2. Open the `.dmg` and drag **OdaxStudio** to your Applications folder
-3. Launch OdaxStudio
-4. The app will automatically set up all services on first run
-
-> **Note:** On first launch, macOS may ask you to allow the app in **System Preferences -> Privacy & Security**.
-
-### Requirements
-
-| Requirement | Minimum |
-|------------|---------|
-| **OS** | macOS 13.0 (Ventura) |
-| **RAM** | 8 GB (16 GB+ recommended) |
-| **Disk** | 10 GB free |
-| **Chip** | Apple Silicon recommended (Intel supported) |
 
 ---
 
 ## Features
 
 ### AI Chat
-- Chat with local LLMs powered by **llama.cpp** (Metal GPU acceleration)
-- PDF analysis - drag & drop documents for instant AI analysis
-- Reasoning panel - see the model's thinking process
-- Local memory - conversations persisted with LanceDB
-- Code execution - run Python directly from chat
-- Document translation - translate documents in background
+- Local LLM inference via **llama.cpp** with Metal GPU acceleration
+- Drag-and-drop **PDF analysis** with structured extraction
+- **Reasoning panel** — see the model's chain-of-thought in real time
+- **Vector memory** — conversations and facts persisted locally with LanceDB
+- **Code execution** — run Python snippets directly from chat
+- **Document translation** — background processing for full documents
 
 ### Integrated IDE
-- Full **VS Code** in browser via code-server
-- AI autocomplete powered by llama.vscode
-- Custom dark theme, clean menus
-- All extensions pre-configured
+- Full **VS Code** experience in-browser via code-server
+- **AI autocomplete** powered by llama.vscode (local, no cloud)
+- Pre-configured dark theme, extensions, and clean menus
+
+### Native macOS App
+- Swift/SwiftUI wrapper with tabbed WebView interface
+- Automatic service lifecycle management (start/stop/health checks)
+- System tray integration and native feel
+
+---
+
+## Quick Start
+
+### Download (macOS)
+
+Download the latest `.dmg` from the **[Releases](https://github.com/odaxai/odaxai-studio/releases)** page:
+
+1. Open the `.dmg` and drag **OdaxStudio** into Applications
+2. Launch OdaxStudio — all services start automatically
+3. On first launch, macOS may ask for permission in **System Preferences → Privacy & Security**
+
+### System Requirements
+
+| Requirement | Minimum | Recommended |
+|------------|---------|-------------|
+| **OS** | macOS 13.0 (Ventura) | macOS 14+ |
+| **RAM** | 8 GB | 16 GB+ |
+| **Disk** | 10 GB free | 20 GB+ |
+| **Chip** | Intel (x86_64) | Apple Silicon (M1/M2/M3/M4) |
 
 ---
 
@@ -77,112 +65,140 @@ Download the latest `.dmg` from the **[Releases](https://github.com/odaxai/odaxa
 ### Prerequisites
 
 - **macOS 13.0+**
-- **Node.js 18+** and **pnpm 8+**
-- **Xcode 15+** (for native app build)
+- **Node.js 18+** and **npm**
+- **Xcode 15+** (for native macOS app build)
+- A **GGUF model** file (download from [Hugging Face](https://huggingface.co/models?search=gguf))
 
-### Steps
+### Setup
 
 ```bash
-# 1. Clone
+# Clone the repository
 git clone https://github.com/odaxai/odaxai-studio.git
 cd odaxai-studio
 
-# 2. Install dependencies
-pnpm install
-
-# 3. Run setup (installs all service dependencies)
+# Install all dependencies
 ./setup.sh
 
-# 4. Download a model
+# Download a model (example: Qwen 2.5 3B)
 mkdir -p ~/.odax/models
-# Download any GGUF model from https://huggingface.co/
-# Example: Qwen 2.5 3B, Llama 3, etc.
+# Place your .gguf model file in ~/.odax/models/
 
-# 5. Launch
+# Launch all services
 ./run-odax.sh
+```
 
-# 6. Build macOS App & Create DMG (Optional)
-# This will generate OdaxStudio.xcodeproj, build the app, and output OdaxStudio.dmg
-# You can rename the dmg to OdaxStudio-1.0.0.dmg for releases.
+### Build the macOS App (optional)
+
+```bash
 cd apps/macos/scripts
 ./build.sh
+# Outputs: OdaxStudio.app and OdaxStudio.dmg
 ```
 
-### Project Structure
+### Environment Variables (optional)
+
+Firebase integration is optional and only needed for cloud sync features. Copy the example file and configure if desired:
+
+```bash
+cp services/odax-chat/.env.example services/odax-chat/.env.local
+```
+
+---
+
+## Architecture
 
 ```
-odaxai-studio/
+OdaxEngine/
 ├── apps/
-│   ├── macos/          # Native macOS App (Swift/SwiftUI)
-│   ├── web/            # Dashboard (Next.js)
-│   └── ide/            # VS Code config & extensions
+│   ├── macos/             # Native macOS app (Swift/SwiftUI)
+│   │   ├── project/       # Xcode project files
+│   │   ├── scripts/       # Build & run scripts
+│   │   └── resources/     # Bundled binaries & extensions
+│   ├── web/               # Dashboard (Next.js)
+│   └── ide/               # VS Code config & extensions
 │
 ├── server/
-│   └── llama.cpp/      # LLM inference (Metal-optimized)
+│   └── llama.cpp/         # LLM inference engine (Metal-optimized)
 │
 ├── services/
-│   ├── odax-chat/      # AI chat interface
-│   └── code-server/    # VS Code IDE
+│   ├── odax-chat/         # AI chat interface (Next.js + React)
+│   └── code-server/       # VS Code in browser
 │
-├── run-odax.sh         # One-command launcher
-└── setup.sh            # Full setup script
+├── packages/              # Shared packages
+├── setup.sh               # Dependency installer
+└── run-odax.sh            # One-command launcher
 ```
 
 ### Services & Ports
 
 | Port | Service | Description |
 |------|---------|-------------|
-| 3000 | Dashboard | Management interface |
-| 3002 | OdaxChat | AI chat + PDF analysis |
-| 8080 | code-server | VS Code IDE |
-| 8081 | llama.cpp | LLM inference API |
+| `3000` | Dashboard | Management UI |
+| `3002` | OdaxAI Chat | AI chat + PDF analysis + translation |
+| `8080` | code-server | VS Code IDE |
+| `8081` | llama.cpp | LLM inference API (OpenAI-compatible) |
 
----
+### Tech Stack
 
-## Tech Stack
-
-| Component | Technology |
-|-----------|-----------|
-| **macOS App** | Swift 5.9, SwiftUI, WKWebView |
-| **Chat** | Next.js, React, TypeScript |
-| **IDE** | code-server + llama.vscode |
-| **AI Backend** | llama.cpp (C/C++, Metal GPU) |
-| **Build** | Turborepo, pnpm workspaces |
+| Layer | Technology |
+|-------|-----------|
+| Native App | Swift 5.9, SwiftUI, WKWebView |
+| AI Chat | Next.js 15, React 19, TypeScript |
+| IDE | code-server (VS Code fork) + llama.vscode |
+| LLM Backend | llama.cpp (C/C++, Metal GPU acceleration) |
+| Vector DB | LanceDB (local, embedded) |
+| Build System | npm workspaces |
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Please:
+Contributions are welcome. Please follow these steps:
+
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes
-4. Push and open a Pull Request
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Make your changes and test them
+4. Commit with a descriptive message: `git commit -m "feat: add my feature"`
+5. Push and open a Pull Request
+
+### Development Tips
+
+- Run services individually for faster iteration:
+  ```bash
+  # Dashboard
+  cd apps/web && npm run dev
+
+  # AI Chat
+  cd services/odax-chat && PORT=3002 npm run dev
+
+  # llama.cpp server
+  cd server/llama.cpp && ./build/bin/llama-server -m ~/.odax/models/your-model.gguf --port 8081
+  ```
+
+- The macOS app embeds all services via `ProcessManager.swift` — changes to web services are reflected on reload
 
 ---
 
 ## License
 
-This project is licensed under the PolyForm Noncommercial 1.0.0 license.
+This project is licensed under the **[PolyForm Noncommercial License 1.0.0](./LICENSE)**.
 
-You may use, copy, modify, and distribute this software for noncommercial purposes only.
+You may use, copy, modify, and distribute this software for **noncommercial purposes only**.
 
-For any commercial use, production deployment, SaaS offering, internal business use, OEM embedding, or revenue-generating use, a separate commercial license from OdaxAI SRL is required.
-
-Commercial licensing: hello@odaxai.com 
-*This is not an open-source license. Commercial use is not permitted under the public license.*
+For commercial licensing inquiries, contact the maintainers.
 
 ---
 
 ## Acknowledgments
 
-OdaxAI Studio integrates several open-source projects:
-- [llama.cpp](https://github.com/ggerganov/llama.cpp) — LLM inference engine
-- [code-server](https://github.com/coder/code-server) — VS Code in browser
+OdaxAI Studio builds on these open-source projects:
+
+- [llama.cpp](https://github.com/ggerganov/llama.cpp) — High-performance LLM inference
+- [code-server](https://github.com/coder/code-server) — VS Code in the browser
+- [LanceDB](https://github.com/lancedb/lancedb) — Embedded vector database
 
 ---
 
 <p align="center">
-  <strong>OdaxAI SRL Copyright 2026</strong><br/>
-  <em>Built for local AI workflows</em>
+  <em>Built for local-first AI workflows</em>
 </p>
