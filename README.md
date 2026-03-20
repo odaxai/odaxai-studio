@@ -87,6 +87,21 @@ mkdir -p ~/.odax/models
 ./run-odax.sh
 ```
 
+### Build llama.cpp Server
+
+The pre-built binaries are not included in the source repo. Build them from source:
+
+```bash
+cd server/llama.cpp
+cmake -B build -DGGML_METAL=ON
+cmake --build build --config Release -j$(sysctl -n hw.ncpu)
+
+# Copy to the macOS app resources
+cp build/bin/llama-server ../../../apps/macos/resources/llama-server/
+cp build/lib/*.dylib ../../../apps/macos/resources/llama-server/
+cp ggml/src/ggml-metal/ggml-metal.metal ../../../apps/macos/resources/llama-server/
+```
+
 ### Build the macOS App (optional)
 
 ```bash
