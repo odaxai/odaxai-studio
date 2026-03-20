@@ -1,10 +1,17 @@
 <div align="center">
-  <img src="services/odax-chat/public/odaxai-logo.png" alt="OdaxAI Studio" height="120" />
+  <a href="https://odaxai.com">
+    <img src="services/odax-chat/public/odaxai-logo.png" alt="OdaxAI Studio" height="120" />
+  </a>
   <h1>OdaxAI Studio</h1>
   <p><strong>Local-first AI workspace for macOS</strong></p>
   <p>
     Chat with LLMs, code in an integrated IDE, analyze documents —<br/>
     everything runs on your machine. No cloud. No API keys. No data leaves your device.
+  </p>
+  <p>
+    <a href="https://odaxai.com"><strong>🌐 odaxai.com</strong></a>
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    <strong>© 2026 OdaxAI SRL · All rights reserved</strong>
   </p>
 </div>
 
