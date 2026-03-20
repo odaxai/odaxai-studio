@@ -7,38 +7,75 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # ─────────────────────────────────────────────
+  # Job 1: OdaxAI Chat (Next.js)
+  # ─────────────────────────────────────────────
   build-chat:
     name: Check OdaxChat (Next.js)
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-          
-      - name: Install dependencies
-        run: pnpm install
-        
-      - name: Build Chat App
-        working-directory: services/odax-chat
-        run: pnpm run build
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: services/odax-chat/package.json
 
+      - name: Install dependencies
+        working-directory: services/odax-chat
+        run: npm install --legacy-peer-deps
+
+      - name: Type check
+        working-directory: services/odax-chat
+        run: npx tsc --noEmit
+        continue-on-error: true
+
+      - name: Build
+        working-directory: services/odax-chat
+        run: npm run build
+        env:
+          # Stub env vars — Firebase Admin initializes lazily (only on actual requests, not build)
+          NEXT_PUBLIC_FIREBASE_API_KEY: stub
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: stub.firebaseapp.com
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: stub-project
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: stub.appspot.com
+          NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: "000000000000"
+          NEXT_PUBLIC_FIREBASE_APP_ID: "1:000000000000:web:stub"
+          NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: G-STUB
+          FIREBASE_PROJECT_ID: stub-project
+          FIREBASE_CLIENT_EMAIL: stub@stub-project.iam.gserviceaccount.com
+          FIREBASE_PRIVATE_KEY: stub
+
+  # ─────────────────────────────────────────────
+  # Job 2: macOS App (Swift)
+  # ─────────────────────────────────────────────
   build-macos:
     name: Check macOS App (Swift)
     runs-on: macos-14
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install xcodegen
         run: brew install xcodegen
-        
-      - name: Build native app
-        working-directory: apps/macos/scripts
-        run: ./build.sh
+
+      - name: Generate Xcode project
+        working-directory: apps/macos/project
+        run: xcodegen generate --spec project.yml --project .
+
+      - name: Build app
+        working-directory: apps/macos/project
+        run: |
+          xcodebuild \
+            -project OdaxStudio.xcodeproj \
+            -scheme OdaxStudio \
+            -configuration Release \
+            -derivedDataPath ../build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet
+          echo "Build succeeded"
