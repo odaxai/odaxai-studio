@@ -236,7 +236,7 @@ This project is licensed under the **[PolyForm Noncommercial License 1.0.0](./LI
 
 You may use, copy, modify, and distribute this software for **noncommercial purposes only**.
 
-For commercial licensing inquiries, please open an issue or contact the maintainers.
+For **commercial** licensing, enterprise terms, and deployment, see [OdaxAI — For Business](https://www.odaxai.com/business).
 
 ---
 
