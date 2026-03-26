@@ -8,10 +8,10 @@ on:
 
 jobs:
   # ─────────────────────────────────────────────
-  # Job 1: OdaxAI Chat (Next.js)
+  # Job 1: OdaxAI Chat — Tests + Build (Next.js)
   # ─────────────────────────────────────────────
-  build-chat:
-    name: Check OdaxChat (Next.js)
+  test-chat:
+    name: Test & Build OdaxChat (Next.js)
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +28,10 @@ jobs:
         working-directory: services/odax-chat
         run: npm install --legacy-peer-deps
 
+      - name: Run tests
+        working-directory: services/odax-chat
+        run: npm test
+
       - name: Type check
         working-directory: services/odax-chat
         run: npx tsc --noEmit
@@ -37,7 +41,6 @@ jobs:
         working-directory: services/odax-chat
         run: npm run build
         env:
-          # Stub env vars — Firebase Admin initializes lazily (only on actual requests, not build)
           NEXT_PUBLIC_FIREBASE_API_KEY: stub
           NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: stub.firebaseapp.com
           NEXT_PUBLIC_FIREBASE_PROJECT_ID: stub-project
@@ -50,10 +53,10 @@ jobs:
           FIREBASE_PRIVATE_KEY: stub
 
   # ─────────────────────────────────────────────
-  # Job 2: macOS App (Swift)
+  # Job 2: macOS App — Tests + Build (Swift)
   # ─────────────────────────────────────────────
-  build-macos:
-    name: Check macOS App (Swift)
+  test-macos:
+    name: Test & Build macOS App (Swift)
     runs-on: macos-15
 
     steps:
@@ -66,7 +69,21 @@ jobs:
         working-directory: apps/macos/project
         run: xcodegen generate --spec project.yml --project .
 
-      - name: Build app
+      - name: Run tests
+        working-directory: apps/macos/project
+        run: |
+          xcodebuild test \
+            -project OdaxStudio.xcodeproj \
+            -scheme OdaxStudioTests \
+            -configuration Debug \
+            -derivedDataPath ../build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            -quiet
+          echo "Tests passed"
+
+      - name: Build release
         working-directory: apps/macos/project
         run: |
           xcodebuild \
